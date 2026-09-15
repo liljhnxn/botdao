@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useAccount, useWriteContract, useWaitForTransactionReceipt } from "wagmi";
 import { isAddress, parseEther } from "viem";
 import { BOTDAO_ABI, BOTDAO_CONTRACT_ADDRESS } from "@/contracts/botdao";
+import { BOTCHAIN_CHAIN_ID } from "@/lib/config";
 import { TransactionStatus, TxStep } from "@/components/TransactionStatus";
 import { formatAddress } from "@/lib/format";
 import {
@@ -101,6 +102,7 @@ export default function CreateProposalPage() {
         abi: BOTDAO_ABI,
         functionName: "createProposal",
         args: [recipient.trim() as `0x${string}`, amountWei, description.trim(), durationSeconds],
+        chainId: BOTCHAIN_CHAIN_ID,
       });
 
       setTxStep("pending");

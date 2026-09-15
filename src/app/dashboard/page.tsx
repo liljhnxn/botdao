@@ -4,6 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { useReadContract } from "wagmi";
 import { BOTDAO_ABI, BOTDAO_CONTRACT_ADDRESS, RawProposal, computeProposalStatus } from "@/contracts/botdao";
+import { BOTCHAIN_CHAIN_ID } from "@/lib/config";
 import { TreasuryCard } from "@/components/TreasuryCard";
 import { ProposalCard } from "@/components/ProposalCard";
 import { Vote, CheckCircle2, CheckCheck, PlusCircle, ArrowRight, Ban, Clock, Filter } from "lucide-react";
@@ -13,12 +14,21 @@ export default function DashboardPage() {
     address: BOTDAO_CONTRACT_ADDRESS,
     abi: BOTDAO_ABI,
     functionName: "getAllProposals",
+    chainId: BOTCHAIN_CHAIN_ID,
+    query: {
+      enabled: Boolean(BOTDAO_CONTRACT_ADDRESS),
+      refetchInterval: 4000,
+    },
   });
 
   const { data: quorumVotes } = useReadContract({
     address: BOTDAO_CONTRACT_ADDRESS,
     abi: BOTDAO_ABI,
     functionName: "quorumVotes",
+    chainId: BOTCHAIN_CHAIN_ID,
+    query: {
+      enabled: Boolean(BOTDAO_CONTRACT_ADDRESS),
+    },
   });
 
   const proposals = (rawProposals as RawProposal[] | undefined) || [];

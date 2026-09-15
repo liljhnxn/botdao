@@ -5,7 +5,7 @@ import { useAccount, useReadContract, useWriteContract, useWaitForTransactionRec
 import { parseEther } from "viem";
 import { BOTDAO_ABI, BOTDAO_CONTRACT_ADDRESS } from "@/contracts/botdao";
 import { formatBOT } from "@/lib/format";
-import { BOTCHAIN_EXPLORER_URL } from "@/lib/config";
+import { BOTCHAIN_EXPLORER_URL, BOTCHAIN_CHAIN_ID } from "@/lib/config";
 import { TransactionStatus, TxStep } from "@/components/TransactionStatus";
 import {
   Vault,
@@ -29,18 +29,32 @@ export default function TreasuryPage() {
     address: BOTDAO_CONTRACT_ADDRESS,
     abi: BOTDAO_ABI,
     functionName: "getTreasuryBalance",
+    chainId: BOTCHAIN_CHAIN_ID,
+    query: {
+      enabled: Boolean(BOTDAO_CONTRACT_ADDRESS),
+      refetchInterval: 4000,
+    },
   });
 
   const { data: quorumVotes } = useReadContract({
     address: BOTDAO_CONTRACT_ADDRESS,
     abi: BOTDAO_ABI,
     functionName: "quorumVotes",
+    chainId: BOTCHAIN_CHAIN_ID,
+    query: {
+      enabled: Boolean(BOTDAO_CONTRACT_ADDRESS),
+    },
   });
 
   const { data: proposalCount } = useReadContract({
     address: BOTDAO_CONTRACT_ADDRESS,
     abi: BOTDAO_ABI,
     functionName: "getProposalCount",
+    chainId: BOTCHAIN_CHAIN_ID,
+    query: {
+      enabled: Boolean(BOTDAO_CONTRACT_ADDRESS),
+      refetchInterval: 4000,
+    },
   });
 
   const { writeContractAsync, data: txHash } = useWriteContract();
@@ -77,6 +91,7 @@ export default function TreasuryPage() {
         abi: BOTDAO_ABI,
         functionName: "depositTreasury",
         value,
+        chainId: BOTCHAIN_CHAIN_ID,
       });
 
       setTxStep("pending");

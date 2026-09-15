@@ -6,7 +6,7 @@ import { useParams } from "next/navigation";
 import { useReadContract } from "wagmi";
 import { BOTDAO_ABI, BOTDAO_CONTRACT_ADDRESS, RawProposal, computeProposalStatus } from "@/contracts/botdao";
 import { formatAddress, formatBOT, formatDate } from "@/lib/format";
-import { BOTCHAIN_EXPLORER_URL } from "@/lib/config";
+import { BOTCHAIN_EXPLORER_URL, BOTCHAIN_CHAIN_ID } from "@/lib/config";
 import { ProposalStatus } from "@/components/ProposalStatus";
 import { Countdown } from "@/components/Countdown";
 import { VotePanel } from "@/components/VotePanel";
@@ -34,12 +34,21 @@ export default function ProposalDetailsPage() {
     abi: BOTDAO_ABI,
     functionName: "getProposal",
     args: [proposalId],
+    chainId: BOTCHAIN_CHAIN_ID,
+    query: {
+      enabled: Boolean(BOTDAO_CONTRACT_ADDRESS && proposalId),
+      refetchInterval: 4000,
+    },
   });
 
   const { data: quorumVotes } = useReadContract({
     address: BOTDAO_CONTRACT_ADDRESS,
     abi: BOTDAO_ABI,
     functionName: "quorumVotes",
+    chainId: BOTCHAIN_CHAIN_ID,
+    query: {
+      enabled: Boolean(BOTDAO_CONTRACT_ADDRESS),
+    },
   });
 
   if (isLoading) {

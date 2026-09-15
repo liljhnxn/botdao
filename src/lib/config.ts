@@ -39,5 +39,4 @@ export const config = createConfig({
   transports: {
     [botchain.id]: http(BOTCHAIN_RPC_URL),
   },
-  ssr: true,
 });

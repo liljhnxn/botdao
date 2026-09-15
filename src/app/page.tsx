@@ -4,6 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { useReadContract } from "wagmi";
 import { BOTDAO_ABI, BOTDAO_CONTRACT_ADDRESS, RawProposal } from "@/contracts/botdao";
+import { BOTCHAIN_CHAIN_ID } from "@/lib/config";
 import { formatBOT } from "@/lib/format";
 import { ProposalCard } from "@/components/ProposalCard";
 import {
@@ -25,24 +26,32 @@ export default function LandingPage() {
     address: BOTDAO_CONTRACT_ADDRESS,
     abi: BOTDAO_ABI,
     functionName: "getTreasuryBalance",
+    chainId: BOTCHAIN_CHAIN_ID,
+    query: { enabled: Boolean(BOTDAO_CONTRACT_ADDRESS), refetchInterval: 4000 },
   });
 
   const { data: proposalCount } = useReadContract({
     address: BOTDAO_CONTRACT_ADDRESS,
     abi: BOTDAO_ABI,
     functionName: "getProposalCount",
+    chainId: BOTCHAIN_CHAIN_ID,
+    query: { enabled: Boolean(BOTDAO_CONTRACT_ADDRESS), refetchInterval: 4000 },
   });
 
   const { data: quorumVotes } = useReadContract({
     address: BOTDAO_CONTRACT_ADDRESS,
     abi: BOTDAO_ABI,
     functionName: "quorumVotes",
+    chainId: BOTCHAIN_CHAIN_ID,
+    query: { enabled: Boolean(BOTDAO_CONTRACT_ADDRESS) },
   });
 
   const { data: rawProposals } = useReadContract({
     address: BOTDAO_CONTRACT_ADDRESS,
     abi: BOTDAO_ABI,
     functionName: "getAllProposals",
+    chainId: BOTCHAIN_CHAIN_ID,
+    query: { enabled: Boolean(BOTDAO_CONTRACT_ADDRESS), refetchInterval: 4000 },
   });
 
   const proposalsList = (rawProposals as RawProposal[] | undefined) || [];

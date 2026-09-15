@@ -5,7 +5,7 @@ import { useAccount, useReadContract, useWriteContract, useWaitForTransactionRec
 import { parseEther } from "viem";
 import { BOTDAO_ABI, BOTDAO_CONTRACT_ADDRESS } from "@/contracts/botdao";
 import { formatBOT } from "@/lib/format";
-import { BOTCHAIN_EXPLORER_URL } from "@/lib/config";
+import { BOTCHAIN_EXPLORER_URL, BOTCHAIN_CHAIN_ID } from "@/lib/config";
 import { Vault, ArrowUpRight, ExternalLink, ShieldAlert, Sparkles, Coins } from "lucide-react";
 import { TransactionStatus, TxStep } from "./TransactionStatus";
 
@@ -20,12 +20,21 @@ export function TreasuryCard() {
     address: BOTDAO_CONTRACT_ADDRESS,
     abi: BOTDAO_ABI,
     functionName: "getTreasuryBalance",
+    chainId: BOTCHAIN_CHAIN_ID,
+    query: {
+      enabled: Boolean(BOTDAO_CONTRACT_ADDRESS),
+      refetchInterval: 4000,
+    },
   });
 
   const { data: quorumVotes } = useReadContract({
     address: BOTDAO_CONTRACT_ADDRESS,
     abi: BOTDAO_ABI,
     functionName: "quorumVotes",
+    chainId: BOTCHAIN_CHAIN_ID,
+    query: {
+      enabled: Boolean(BOTDAO_CONTRACT_ADDRESS),
+    },
   });
 
   const { writeContractAsync, data: txHash } = useWriteContract();
@@ -63,6 +72,7 @@ export function TreasuryCard() {
         abi: BOTDAO_ABI,
         functionName: "depositTreasury",
         value,
+        chainId: BOTCHAIN_CHAIN_ID,
       });
 
       setTxStep("pending");

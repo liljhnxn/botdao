@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { useAccount, useReadContract, useWriteContract, useWaitForTransactionReceipt } from "wagmi";
 import { BOTDAO_ABI, BOTDAO_CONTRACT_ADDRESS, RawProposal, computeProposalStatus } from "@/contracts/botdao";
+import { BOTCHAIN_CHAIN_ID } from "@/lib/config";
 import { formatBOT } from "@/lib/format";
 import { ThumbsUp, ThumbsDown, CheckCircle2, AlertCircle, Play, Ban, ShieldCheck, Loader2 } from "lucide-react";
 import { TransactionStatus, TxStep } from "./TransactionStatus";
@@ -27,6 +28,10 @@ export function VotePanel({ proposal, quorumVotes = BigInt(2), onRefresh }: Prop
     abi: BOTDAO_ABI,
     functionName: "hasUserVoted",
     args: [proposal.id, (address || "0x0000000000000000000000000000000000000000") as `0x${string}`],
+    chainId: BOTCHAIN_CHAIN_ID,
+    query: {
+      enabled: Boolean(BOTDAO_CONTRACT_ADDRESS && address),
+    },
   });
 
   // Check if proposal passed on-chain
@@ -35,6 +40,10 @@ export function VotePanel({ proposal, quorumVotes = BigInt(2), onRefresh }: Prop
     abi: BOTDAO_ABI,
     functionName: "proposalPassed",
     args: [proposal.id],
+    chainId: BOTCHAIN_CHAIN_ID,
+    query: {
+      enabled: Boolean(BOTDAO_CONTRACT_ADDRESS),
+    },
   });
 
   const { writeContractAsync, data: txHash } = useWriteContract();
