@@ -40,6 +40,7 @@ export default function ProposalsPage() {
     { id: "Voting", label: "Voting Active" },
     { id: "Passed", label: "Passed" },
     { id: "Executed", label: "Executed" },
+    { id: "Rejected", label: "Rejected" },
     { id: "Canceled", label: "Canceled" },
   ];
 
