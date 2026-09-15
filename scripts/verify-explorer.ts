@@ -62,7 +62,7 @@ async function verifyExplorer(endpoint: string, contractAddress: string) {
 }
 
 async function main() {
-  const contractAddress = process.env.NEXT_PUBLIC_BOTDAO_CONTRACT_ADDRESS || "0x0E88F330627423a40947378bb91EF3215707cCfa";
+  const contractAddress = process.env.NEXT_PUBLIC_BOTDAO_CONTRACT_ADDRESS || "0x8e0FC0fAe92E70D83fC6Bdf0a124057394A0dA57";
   console.log("Verifying BotDAO at:", contractAddress);
   await verifyExplorer("https://scan.botchain.ai/api", contractAddress);
 }
