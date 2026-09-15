@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <defs>
+    <linearGradient id="daoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366f1" />
+      <stop offset="50%" stop-color="#06b6d4" />
+      <stop offset="100%" stop-color="#3b82f6" />
+    </linearGradient>
+    <linearGradient id="innerGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#080b11" />
+      <stop offset="100%" stop-color="#1e1b4b" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="1" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background rounded hexagon / shield -->
+  <rect width="32" height="32" rx="8" fill="#06090e" />
+  
+  <!-- Outer Shield Border with Gradient -->
+  <path d="M16 4 L26 8.5 V17.5 C26 23.5 16 28 16 28 C16 28 6 23.5 6 17.5 V8.5 Z" 
+        fill="url(#innerGrad)" 
+        stroke="url(#daoGrad)" 
+        stroke-width="1.8" 
+        stroke-linejoin="round" />
+
+  <!-- Inner Cyber Core -->
+  <circle cx="16" cy="14" r="3.2" fill="url(#daoGrad)" filter="url(#glow)" />
+  <circle cx="16" cy="14" r="1.5" fill="#ffffff" />
+
+  <!-- Bottom Circuit lines -->
+  <path d="M16 17.5 V23 M12.5 19.5 L16 21 L19.5 19.5" 
+        stroke="#22d3ee" 
+        stroke-width="1.2" 
+        stroke-linecap="round" 
+        stroke-linejoin="round" />
+</svg>
