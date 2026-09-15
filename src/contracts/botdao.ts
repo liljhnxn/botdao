@@ -1,7 +1,7 @@
 import BotDAOArtifact from "./BotDAO.json";
 import { Abi } from "viem";
 
-export const BOTDAO_CONTRACT_ADDRESS = (process.env.NEXT_PUBLIC_BOTDAO_CONTRACT_ADDRESS || "") as `0x${string}`;
+export const BOTDAO_CONTRACT_ADDRESS = (process.env.NEXT_PUBLIC_BOTDAO_CONTRACT_ADDRESS || "0x0E88F330627423a40947378bb91EF3215707cCfa") as `0x${string}`;
 
 export const BOTDAO_ABI = BotDAOArtifact.abi as Abi;
 
