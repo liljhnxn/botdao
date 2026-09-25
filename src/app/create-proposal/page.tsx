@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useAccount, useWriteContract, useWaitForTransactionReceipt } from "wagmi";
 import { isAddress, parseEther } from "viem";
 import { BOTDAO_ABI, BOTDAO_CONTRACT_ADDRESS } from "@/contracts/botdao";
-import { BOTCHAIN_CHAIN_ID } from "@/lib/config";
+import { BOTCHAIN_CHAIN_ID, BOTCHAIN_EXPLORER_URL } from "@/lib/config";
 import { TransactionStatus, TxStep } from "@/components/TransactionStatus";
 import { formatAddress } from "@/lib/format";
 import {
@@ -18,6 +18,7 @@ import {
   CheckCircle2,
   Sparkles,
   ArrowRight,
+  ExternalLink,
 } from "lucide-react";
 
 export default function CreateProposalPage() {
@@ -116,14 +117,26 @@ export default function CreateProposalPage() {
   return (
     <div className="max-w-2xl mx-auto space-y-8">
       {/* Header */}
-      <div>
-        <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight flex items-center gap-3">
-          <PlusCircle className="w-7 h-7 text-indigo-400" />
-          Create Governance Proposal
-        </h1>
-        <p className="text-xs sm:text-sm text-slate-400 mt-1">
-          Submit an on-chain proposal to request native BOT funding from the BotDAO community treasury.
-        </p>
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight flex items-center gap-3">
+            <PlusCircle className="w-7 h-7 text-indigo-400" />
+            Create Governance Proposal
+          </h1>
+          <p className="text-xs sm:text-sm text-slate-400 mt-1">
+            Submit an on-chain proposal to request native BOT funding from the BotDAO community treasury.
+          </p>
+        </div>
+
+        <a
+          href={`${BOTCHAIN_EXPLORER_URL}/address/${BOTDAO_CONTRACT_ADDRESS}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-slate-900/80 hover:bg-slate-800 text-slate-300 hover:text-cyan-300 border border-slate-700/80 hover:border-cyan-500/40 transition-all self-start sm:self-auto shrink-0"
+        >
+          <span>Botchain Explorer</span>
+          <ExternalLink className="w-3.5 h-3.5 text-cyan-400" />
+        </a>
       </div>
 
       {/* Form Container */}
@@ -167,15 +180,28 @@ export default function CreateProposalPage() {
               onChange={(e) => setRecipient(e.target.value)}
               className="w-full bg-slate-900/90 border border-slate-700 rounded-xl px-4 py-2.5 text-xs sm:text-sm font-mono text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 transition-colors"
             />
-            {address && (
-              <button
-                type="button"
-                onClick={() => setRecipient(address)}
-                className="text-[11px] text-indigo-400 hover:text-indigo-300 mt-1 font-medium"
-              >
-                Use connected wallet address ({formatAddress(address)})
-              </button>
-            )}
+            <div className="flex flex-wrap items-center justify-between gap-2 mt-1">
+              {address && (
+                <button
+                  type="button"
+                  onClick={() => setRecipient(address)}
+                  className="text-[11px] text-indigo-400 hover:text-indigo-300 font-medium"
+                >
+                  Use connected wallet ({formatAddress(address)})
+                </button>
+              )}
+              {recipient.trim() && isAddress(recipient.trim()) && (
+                <a
+                  href={`${BOTCHAIN_EXPLORER_URL}/address/${recipient.trim()}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[11px] text-cyan-400 hover:text-cyan-300 inline-flex items-center gap-1 font-medium hover:underline ml-auto"
+                >
+                  <span>Verify on Explorer</span>
+                  <ExternalLink className="w-2.5 h-2.5" />
+                </a>
+              )}
+            </div>
           </div>
 
           {/* Amount Requested */}

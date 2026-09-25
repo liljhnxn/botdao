@@ -4,7 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { useReadContract } from "wagmi";
 import { BOTDAO_ABI, BOTDAO_CONTRACT_ADDRESS, RawProposal } from "@/contracts/botdao";
-import { BOTCHAIN_CHAIN_ID } from "@/lib/config";
+import { BOTCHAIN_CHAIN_ID, BOTCHAIN_EXPLORER_URL } from "@/lib/config";
 import { formatBOT } from "@/lib/format";
 import { ProposalCard } from "@/components/ProposalCard";
 import {
@@ -19,6 +19,7 @@ import {
   Lock,
   Layers,
   Zap,
+  ExternalLink,
 } from "lucide-react";
 
 export default function LandingPage() {
@@ -68,9 +69,19 @@ export default function LandingPage() {
     <div className="space-y-24 py-6 sm:py-12">
       {/* Hero Section */}
       <section className="relative text-center space-y-8 max-w-4xl mx-auto pt-6">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 text-xs font-semibold shadow-inner">
+        <div className="inline-flex flex-wrap items-center justify-center gap-2 px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 text-xs font-semibold shadow-inner">
           <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
           <span>Decentralized Governance on Botchain Mainnet</span>
+          <span className="text-slate-500">•</span>
+          <a
+            href={BOTCHAIN_EXPLORER_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-cyan-400 hover:text-cyan-300 inline-flex items-center gap-1 font-medium hover:underline transition-colors"
+          >
+            <span>scan.botchain.ai</span>
+            <ExternalLink className="w-3 h-3" />
+          </a>
         </div>
 
         <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-tight">
@@ -99,6 +110,15 @@ export default function LandingPage() {
             <Vault className="w-4 h-4 text-indigo-400" />
             <span>View Treasury</span>
           </Link>
+          <a
+            href={`${BOTCHAIN_EXPLORER_URL}/address/${BOTDAO_CONTRACT_ADDRESS}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full sm:w-auto px-6 py-3.5 rounded-xl font-semibold text-sm bg-slate-900/80 hover:bg-slate-800 text-cyan-300 hover:text-cyan-200 border border-cyan-500/30 hover:border-cyan-500/60 transition-all flex items-center justify-center gap-2"
+          >
+            <ExternalLink className="w-4 h-4 text-cyan-400" />
+            <span>Explorer Contract</span>
+          </a>
         </div>
       </section>
 
@@ -111,7 +131,15 @@ export default function LandingPage() {
           <div className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
             {formatBOT(treasuryBalance as bigint | undefined)} <span className="text-sm font-bold text-indigo-400">BOT</span>
           </div>
-          <div className="text-[11px] text-slate-500 mt-1">Live smart contract balance</div>
+          <a
+            href={`${BOTCHAIN_EXPLORER_URL}/address/${BOTDAO_CONTRACT_ADDRESS}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[11px] text-cyan-400/90 hover:text-cyan-300 inline-flex items-center gap-1 mt-1 transition-colors group"
+          >
+            <span>View on Explorer</span>
+            <ExternalLink className="w-2.5 h-2.5 text-cyan-400 group-hover:translate-x-0.5 transition-transform" />
+          </a>
         </div>
 
         <div className="glass-panel rounded-2xl p-5 sm:p-6 border border-slate-800 text-center relative overflow-hidden">

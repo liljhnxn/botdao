@@ -4,8 +4,8 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { WalletButton } from "./WalletButton";
-import { Shield, Vote, LayoutDashboard, PlusCircle, Vault, Menu, X, Coins, FileText } from "lucide-react";
-import { BOTCHAIN_CHAIN_ID } from "@/lib/config";
+import { Shield, Vote, LayoutDashboard, PlusCircle, Vault, Menu, X, Coins, FileText, ExternalLink } from "lucide-react";
+import { BOTCHAIN_CHAIN_ID, BOTCHAIN_EXPLORER_URL } from "@/lib/config";
 
 export function Navbar() {
   const pathname = usePathname();
@@ -17,6 +17,7 @@ export function Navbar() {
     { name: "Create Proposal", href: "/create-proposal", icon: <PlusCircle className="w-4 h-4" /> },
     { name: "Treasury", href: "/treasury", icon: <Vault className="w-4 h-4" /> },
     { name: "Whitepaper", href: "/whitepaper", icon: <FileText className="w-4 h-4" /> },
+    { name: "Explorer", href: BOTCHAIN_EXPLORER_URL, icon: <ExternalLink className="w-3.5 h-3.5 text-cyan-400" />, isExternal: true },
   ];
 
   return (
@@ -43,6 +44,20 @@ export function Navbar() {
           {/* Desktop Navigation Links */}
           <nav className="hidden md:flex items-center gap-1">
             {navLinks.map((link) => {
+              if (link.isExternal) {
+                return (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium text-slate-300 hover:text-white hover:bg-slate-900/60 border border-transparent transition-all"
+                  >
+                    <span>{link.name}</span>
+                    {link.icon}
+                  </a>
+                );
+              }
               const isActive = pathname === link.href;
               return (
                 <Link
@@ -63,10 +78,17 @@ export function Navbar() {
 
           {/* Right Area: Network badge & Wallet Button */}
           <div className="flex items-center gap-3">
-            <div className="hidden lg:flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-900/70 border border-slate-800 text-[11px] text-slate-400 font-medium">
-              <Coins className="w-3.5 h-3.5 text-cyan-400" />
+            <a
+              href={BOTCHAIN_EXPLORER_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden lg:flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-900/70 hover:bg-slate-800/90 border border-slate-800 hover:border-cyan-500/40 text-[11px] text-slate-400 hover:text-cyan-300 transition-all font-medium group"
+              title="View Botchain Mainnet Block Explorer"
+            >
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
               <span>Botchain {BOTCHAIN_CHAIN_ID}</span>
-            </div>
+              <ExternalLink className="w-3 h-3 text-slate-500 group-hover:text-cyan-400 transition-colors" />
+            </a>
             <WalletButton />
 
             {/* Mobile Hamburger */}
@@ -84,6 +106,24 @@ export function Navbar() {
       {mobileMenuOpen && (
         <div className="md:hidden border-t border-slate-800/80 bg-slate-950/95 px-4 pt-3 pb-5 space-y-1.5 animate-fadeIn">
           {navLinks.map((link) => {
+            if (link.isExternal) {
+              return (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-900"
+                >
+                  <div className="flex items-center gap-3">
+                    <Coins className="w-4 h-4 text-cyan-400" />
+                    <span>Botchain Explorer</span>
+                  </div>
+                  <ExternalLink className="w-4 h-4 text-cyan-400" />
+                </a>
+              );
+            }
             const isActive = pathname === link.href;
             return (
               <Link

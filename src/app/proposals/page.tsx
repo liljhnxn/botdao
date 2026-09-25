@@ -4,9 +4,9 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { useReadContract } from "wagmi";
 import { BOTDAO_ABI, BOTDAO_CONTRACT_ADDRESS, RawProposal, computeProposalStatus, ProposalStatusType } from "@/contracts/botdao";
-import { BOTCHAIN_CHAIN_ID } from "@/lib/config";
+import { BOTCHAIN_CHAIN_ID, BOTCHAIN_EXPLORER_URL } from "@/lib/config";
 import { ProposalCard } from "@/components/ProposalCard";
-import { Vote, PlusCircle, Search, Filter } from "lucide-react";
+import { Vote, PlusCircle, Search, Filter, ExternalLink } from "lucide-react";
 
 export default function ProposalsPage() {
   const [selectedFilter, setSelectedFilter] = useState<string>("All");
@@ -76,13 +76,24 @@ export default function ProposalsPage() {
           </p>
         </div>
 
-        <Link
-          href="/create-proposal"
-          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold text-xs bg-gradient-to-r from-indigo-600 to-cyan-600 hover:from-indigo-500 hover:to-cyan-500 text-white shadow-lg shadow-indigo-500/20 transition-all self-start sm:self-auto"
-        >
-          <PlusCircle className="w-4 h-4" />
-          <span>Create Proposal</span>
-        </Link>
+        <div className="flex items-center gap-3 self-start sm:self-auto">
+          <a
+            href={`${BOTCHAIN_EXPLORER_URL}/address/${BOTDAO_CONTRACT_ADDRESS}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl font-semibold text-xs bg-slate-900/80 hover:bg-slate-800 text-slate-300 hover:text-cyan-300 border border-slate-700/80 hover:border-cyan-500/40 transition-all"
+          >
+            <span>Botchain Explorer</span>
+            <ExternalLink className="w-3.5 h-3.5 text-cyan-400" />
+          </a>
+          <Link
+            href="/create-proposal"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold text-xs bg-gradient-to-r from-indigo-600 to-cyan-600 hover:from-indigo-500 hover:to-cyan-500 text-white shadow-lg shadow-indigo-500/20 transition-all"
+          >
+            <PlusCircle className="w-4 h-4" />
+            <span>Create Proposal</span>
+          </Link>
+        </div>
       </div>
 
       {/* Filter and Search Bar */}

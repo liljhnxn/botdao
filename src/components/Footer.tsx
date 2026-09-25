@@ -83,13 +83,24 @@ export function Footer() {
                     href={`${BOTCHAIN_EXPLORER_URL}/address/${BOTDAO_CONTRACT_ADDRESS}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-indigo-400 hover:text-indigo-300"
+                    className="inline-flex items-center gap-1 text-indigo-400 hover:text-indigo-300 font-medium"
                   >
-                    <span>DAO Contract</span>
+                    <span>DAO Contract (Verified)</span>
                     <ExternalLink className="w-3 h-3" />
                   </a>
                 </li>
               )}
+              <li>
+                <a
+                  href="https://github.com/liljhnxn/botdao"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 hover:text-indigo-400 transition-colors"
+                >
+                  <span>GitHub Repository</span>
+                  <ExternalLink className="w-3 h-3" />
+                </a>
+              </li>
             </ul>
           </div>
         </div>
