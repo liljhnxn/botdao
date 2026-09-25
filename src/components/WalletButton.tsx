@@ -75,7 +75,7 @@ export function WalletButton() {
                 <div className="mt-1 text-[11px] text-slate-400 flex items-center justify-between">
                   <span>Network:</span>
                   <span className="text-emerald-400 font-semibold flex items-center gap-1">
-                    <ShieldCheck className="w-3 h-3" /> Botchain (968)
+                    <ShieldCheck className="w-3 h-3" /> Botchain ({BOTCHAIN_CHAIN_ID})
                   </span>
                 </div>
               </div>

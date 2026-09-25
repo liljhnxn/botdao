@@ -2,13 +2,13 @@
 
 > **Govern Together. Build On-Chain.**
 >
-> A decentralized community treasury where users create proposals, vote on decisions, and execute approved payments entirely on-chain on Botchain Testnet.
+> A decentralized community treasury where users create proposals, vote on decisions, and execute approved payments entirely on-chain on Botchain Mainnet.
 
 ---
 
 ## 🌟 Overview
 
-**BotDAO** is a full-stack Web3 application and decentralized autonomous organization (DAO) on **Botchain/Bohr Testnet (Chain ID 968)**. It empowers community members to pool native BOT tokens into a shared treasury, submit detailed funding proposals, cast on-chain votes, and trigger non-custodial payouts to verified recipients once proposals pass.
+**BotDAO** is a full-stack Web3 application and decentralized autonomous organization (DAO) on **Botchain Mainnet (Chain ID 677)**. It empowers community members to pool native BOT tokens into a shared treasury, submit detailed funding proposals, cast on-chain votes, and trigger non-custodial payouts to verified recipients once proposals pass.
 
 ---
 
@@ -29,22 +29,23 @@
 
 - **Smart Contract**: Solidity `^0.8.24`, OpenZeppelin Contracts (`ReentrancyGuard`)
 - **Blockchain Framework**: Hardhat 2 / 3, Ethers v6, TypeChain
-- **Target Network**: Botchain / Bohr Testnet (Chain ID `968`)
+- **Target Network**: Botchain Mainnet (Chain ID `677`)
 - **Frontend**: Next.js 14 (App Router), TypeScript, Tailwind CSS
 - **Web3 Client**: `wagmi` v2, `viem` v2, `@tanstack/react-query`
 - **Icons & UI**: `lucide-react`, `clsx`, `tailwind-merge`
 
 ---
 
-## 🌐 Botchain Testnet Configuration
+## 🌐 Botchain Mainnet Configuration
 
 | Parameter | Value |
 | :--- | :--- |
-| **Network Name** | Botchain Testnet |
-| **Chain ID** | `968` |
-| **RPC URL** | `https://rpc.bohr.life` |
-| **Block Explorer** | `https://scan.bohr.life` |
+| **Network Name** | Botchain Mainnet |
+| **Chain ID** | `677` |
+| **RPC URL** | `https://rpc.botchain.ai` |
+| **Block Explorer** | `https://scan.botchain.ai` |
 | **Native Currency** | `BOT` (18 Decimals) |
+| **Deployed Contract** | `0x8e0FC0fAe92E70D83fC6Bdf0a124057394A0dA57` |
 
 ---
 
@@ -99,10 +100,10 @@ cp .env.example .env.local
 Populate the variables:
 
 ```env
-NEXT_PUBLIC_BOTCHAIN_CHAIN_ID=968
-NEXT_PUBLIC_BOTCHAIN_RPC_URL=https://rpc.bohr.life
-NEXT_PUBLIC_BOTCHAIN_EXPLORER_URL=https://scan.bohr.life
-NEXT_PUBLIC_BOTDAO_CONTRACT_ADDRESS=0x...
+NEXT_PUBLIC_BOTCHAIN_CHAIN_ID=677
+NEXT_PUBLIC_BOTCHAIN_RPC_URL=https://rpc.botchain.ai
+NEXT_PUBLIC_BOTCHAIN_EXPLORER_URL=https://scan.botchain.ai
+NEXT_PUBLIC_BOTDAO_CONTRACT_ADDRESS=0x8e0FC0fAe92E70D83fC6Bdf0a124057394A0dA57
 PRIVATE_KEY=your_private_key_here
 ```
 
@@ -114,12 +115,12 @@ Run the comprehensive Hardhat test suite:
 npm test
 ```
 
-### 4. Deploy Smart Contract to Botchain Testnet
+### 4. Deploy Smart Contract to Botchain Mainnet
 
-Ensure you have testnet BOT in your deployer account, then run:
+Ensure you have BOT in your deployer account, then run:
 
 ```bash
-npm run deploy
+npm run deploy:mainnet
 ```
 
 Copy the printed contract address into `NEXT_PUBLIC_BOTDAO_CONTRACT_ADDRESS` in `.env.local`.

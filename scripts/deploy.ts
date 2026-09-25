@@ -2,8 +2,9 @@ import hre from "hardhat";
 const { ethers } = hre;
 
 async function main() {
+  const network = await ethers.provider.getNetwork();
   console.log("-----------------------------------------");
-  console.log("Deploying BotDAO to Botchain Testnet...");
+  console.log(`Deploying BotDAO to Chain ID: ${network.chainId}...`);
   console.log("-----------------------------------------");
 
   const [deployer] = await ethers.getSigners();
@@ -11,12 +12,14 @@ async function main() {
   const balance = await ethers.provider.getBalance(deployer.address);
   console.log("Account balance:", ethers.formatEther(balance), "BOT");
 
-  // Initial quorum: 2 votes for testnet flexibility
+  // Initial quorum: 2 votes for governance flexibility
   const initialQuorum = 2;
   console.log(`Setting initial quorum votes to: ${initialQuorum}`);
 
   const BotDAO = await ethers.getContractFactory("BotDAO");
-  const botDAO = await BotDAO.deploy(initialQuorum);
+  const botDAO = await BotDAO.deploy(initialQuorum, {
+    gasPrice: ethers.parseUnits("20", "gwei"),
+  });
   await botDAO.waitForDeployment();
 
   const deployedAddress = await botDAO.getAddress();

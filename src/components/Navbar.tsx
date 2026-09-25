@@ -4,7 +4,8 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { WalletButton } from "./WalletButton";
-import { Shield, Vote, LayoutDashboard, PlusCircle, Vault, Menu, X, Coins } from "lucide-react";
+import { Shield, Vote, LayoutDashboard, PlusCircle, Vault, Menu, X, Coins, FileText } from "lucide-react";
+import { BOTCHAIN_CHAIN_ID } from "@/lib/config";
 
 export function Navbar() {
   const pathname = usePathname();
@@ -15,6 +16,7 @@ export function Navbar() {
     { name: "Proposals", href: "/proposals", icon: <Vote className="w-4 h-4" /> },
     { name: "Create Proposal", href: "/create-proposal", icon: <PlusCircle className="w-4 h-4" /> },
     { name: "Treasury", href: "/treasury", icon: <Vault className="w-4 h-4" /> },
+    { name: "Whitepaper", href: "/whitepaper", icon: <FileText className="w-4 h-4" /> },
   ];
 
   return (
@@ -63,7 +65,7 @@ export function Navbar() {
           <div className="flex items-center gap-3">
             <div className="hidden lg:flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-900/70 border border-slate-800 text-[11px] text-slate-400 font-medium">
               <Coins className="w-3.5 h-3.5 text-cyan-400" />
-              <span>Botchain 968</span>
+              <span>Botchain {BOTCHAIN_CHAIN_ID}</span>
             </div>
             <WalletButton />
 

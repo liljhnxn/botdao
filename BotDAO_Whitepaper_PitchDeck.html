@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BotDAO — Whitepaper & Pitch Deck (v1.0)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090d16;
+      --card-bg: rgba(18, 26, 44, 0.7);
+      --card-border: rgba(99, 102, 241, 0.2);
+      --accent: #6366f1;
+      --accent-glow: rgba(99, 102, 241, 0.35);
+      --cyan: #06b6d4;
+      --emerald: #10b981;
+      --amber: #f59e0b;
+      --rose: #f43f5e;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-heading: 'Space Grotesk', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      line-height: 1.65;
+      font-size: 15px;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(99, 102, 241, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 85% 65%, rgba(6, 182, 212, 0.1) 0%, transparent 40%);
+      background-attachment: fixed;
+    }
+
+    /* Floating Action Bar for User */
+    .action-bar {
+      position: fixed;
+      top: 16px;
+      right: 20px;
+      z-index: 1000;
+      display: flex;
+      gap: 12px;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(12px);
+      padding: 8px 14px;
+      border-radius: 9999px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 9999px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #6366f1, #4f46e5);
+      color: white;
+      box-shadow: 0 4px 14px var(--accent-glow);
+    }
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 60px 24px 100px;
+    }
+
+    /* Cover / Hero */
+    .cover-card {
+      background: linear-gradient(145deg, rgba(24, 32, 54, 0.8), rgba(15, 20, 36, 0.9));
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 56px 48px;
+      margin-bottom: 40px;
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.6);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cover-card::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 350px;
+      height: 350px;
+      background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .brand-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      background: rgba(99, 102, 241, 0.15);
+      border: 1px solid rgba(99, 102, 241, 0.35);
+      border-radius: 9999px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #818cf8;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 20px;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: var(--font-heading);
+      letter-spacing: -0.02em;
+    }
+
+    h1.title {
+      font-size: 42px;
+      line-height: 1.15;
+      font-weight: 700;
+      margin-bottom: 12px;
+      background: linear-gradient(135deg, #ffffff 40%, #94a3b8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    p.tagline {
+      font-size: 19px;
+      color: #cbd5e1;
+      font-weight: 500;
+      margin-bottom: 24px;
+      max-width: 680px;
+    }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin-top: 28px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .meta-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .meta-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+
+    .meta-value {
+      font-size: 14px;
+      font-weight: 600;
+      color: #f8fafc;
+      margin-top: 2px;
+    }
+
+    .meta-value code {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: #38bdf8;
+    }
+
+    /* Section Cards */
+    .section-card {
+      background: var(--card-bg);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 20px;
+      padding: 36px;
+      margin-bottom: 32px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.4);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .section-num {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--accent), var(--cyan));
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 14px;
+      font-family: var(--font-heading);
+    }
+
+    .section-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    /* Grid layout */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 20px;
+      margin: 20px 0;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin: 20px 0;
+    }
+
+    .feature-box {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 14px;
+      padding: 20px;
+      transition: border-color 0.2s;
+    }
+    .feature-box:hover {
+      border-color: rgba(99, 102, 241, 0.4);
+    }
+
+    .feature-icon {
+      font-size: 24px;
+      margin-bottom: 12px;
+    }
+
+    .feature-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #f1f5f9;
+      margin-bottom: 8px;
+    }
+
+    .feature-desc {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    /* Highlights Callout */
+    .callout {
+      background: rgba(99, 102, 241, 0.08);
+      border-left: 4px solid var(--accent);
+      padding: 16px 20px;
+      border-radius: 0 12px 12px 0;
+      margin: 20px 0;
+      font-size: 14px;
+      color: #e2e8f0;
+    }
+
+    /* Workflow Diagram */
+    .workflow {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      justify-content: space-between;
+      margin: 24px 0;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.25);
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .step-box {
+      flex: 1;
+      min-width: 140px;
+      background: rgba(30, 41, 59, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 14px;
+      text-align: center;
+    }
+
+    .step-box strong {
+      display: block;
+      color: #38bdf8;
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+
+    .step-box span {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .arrow {
+      color: #6366f1;
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    /* Table styling */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 13.5px;
+    }
+
+    th, td {
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    th {
+      background: rgba(255, 255, 255, 0.04);
+      color: #94a3b8;
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 0.05em;
+    }
+
+    td {
+      color: #e2e8f0;
+    }
+
+    td code {
+      font-family: var(--font-mono);
+      background: rgba(0, 0, 0, 0.35);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: #38bdf8;
+      font-size: 12px;
+    }
+
+    /* Roadmap List */
+    .timeline {
+      position: relative;
+      padding-left: 28px;
+      margin: 20px 0;
+    }
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 8px;
+      top: 4px;
+      bottom: 4px;
+      width: 2px;
+      background: rgba(99, 102, 241, 0.3);
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 24px;
+    }
+    .timeline-dot {
+      position: absolute;
+      left: -28px;
+      top: 3px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 3px solid var(--accent);
+    }
+    .timeline-dot.done {
+      border-color: var(--emerald);
+      background: var(--emerald);
+    }
+    .timeline-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 4px;
+    }
+    .timeline-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* Footer */
+    .doc-footer {
+      text-align: center;
+      padding-top: 40px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    /* PRINT STYLES FOR CLEAN PDF EXPORT */
+    @media print {
+      body {
+        background: #ffffff !important;
+        color: #0f172a !important;
+        font-size: 12pt;
+      }
+      .action-bar {
+        display: none !important;
+      }
+      .container {
+        max-width: 100% !important;
+        padding: 0 !important;
+      }
+      .cover-card, .section-card, .feature-box, .step-box {
+        background: #ffffff !important;
+        border: 1px solid #cbd5e1 !important;
+        box-shadow: none !important;
+        color: #0f172a !important;
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+      h1.title {
+        background: none !important;
+        -webkit-text-fill-color: initial !important;
+        color: #0f172a !important;
+      }
+      .section-title {
+        color: #0f172a !important;
+      }
+      .callout {
+        background: #f1f5f9 !important;
+        color: #1e293b !important;
+        border-left: 4px solid #4f46e5 !important;
+      }
+      td code, .meta-value code {
+        background: #f1f5f9 !important;
+        color: #0369a1 !important;
+        border: 1px solid #e2e8f0;
+      }
+      th {
+        background: #f8fafc !important;
+        color: #475569 !important;
+      }
+      td {
+        color: #1e293b !important;
+      }
+      .page-break {
+        page-break-before: always;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Actions for Instant Print / PDF Save -->
+  <div class="action-bar">
+    <button class="btn btn-primary" onclick="window.print()">
+      🖨️ Print / Save as PDF
+    </button>
+    <button class="btn btn-secondary" onclick="copyDocumentLink()">
+      🔗 Copy Document Link
+    </button>
+    <a href="https://scan.botchain.ai/address/0x8e0FC0fAe92E70D83fC6Bdf0a124057394A0dA57" target="_blank" class="btn btn-secondary">
+      🔍 View on Explorer
+    </a>
+  </div>
+
+  <div class="container">
+
+    <!-- 0. COVER / TITLE SLIDE -->
+    <div class="cover-card">
+      <div class="brand-badge">🚀 Official Protocol Whitepaper & Pitch Deck</div>
+      <h1 class="title">BOTDAO</h1>
+      <p class="tagline">Decentralized Community Governance & Treasury Infrastructure on Botchain</p>
+      
+      <p style="color: #94a3b8; font-size: 14px; max-width: 700px; line-height: 1.6;">
+        A turnkey, non-custodial decentralized autonomous organization (DAO) framework enabling transparent resource pooling, community-driven grant proposals, democratic 1-wallet-1-vote decision making, and trustless on-chain fund disbursements on Botchain Mainnet.
+      </p>
+
+      <div class="meta-grid">
+        <div class="meta-item">
+          <span class="meta-label">Protocol Version</span>
+          <span class="meta-value">v1.0 (Live Mainnet)</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Target Network</span>
+          <span class="meta-value">Botchain Mainnet (Chain ID 677)</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Native Currency</span>
+          <span class="meta-value">BOT (18 Decimals)</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Contract Address</span>
+          <span class="meta-value"><code>0x8e0FC0fAe92E70D83fC6Bdf0a124057394A0dA57</code></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 1. EXECUTIVE SUMMARY (PITCH SLIDE) -->
+    <div class="section-card">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <h2 class="section-title">Executive Summary</h2>
+      </div>
+      <p>
+        Emerging blockchain ecosystems face a critical hurdle: early-stage community funds, developer grants, and ecosystem treasuries remain controlled by opaque multisigs or centralized foundations. This undermines community trust and stalls grassroots innovation.
+      </p>
+      <p style="margin-top: 12px;">
+        <strong>BotDAO</strong> provides the foundational governance and treasury primitive for the Botchain ecosystem. It introduces a trustless, transparent on-chain treasury where community members deposit native <code>BOT</code> tokens, submit granular funding proposals, vote transparently, and automatically trigger non-custodial payouts upon reaching quorum and approval.
+      </p>
+
+      <div class="grid-3" style="margin-top: 24px;">
+        <div class="feature-box">
+          <div class="feature-icon">🛡️</div>
+          <div class="feature-title">100% Non-Custodial</div>
+          <div class="feature-desc">No admin backdoors or owner withdrawal keys. Treasury funds leave the contract strictly through passed community proposals.</div>
+        </div>
+        <div class="feature-box">
+          <div class="feature-icon">🗳️</div>
+          <div class="feature-title">Democratic Voting</div>
+          <div class="feature-desc">1-wallet = 1-vote mechanism with immutable on-chain records and double-voting prevention.</div>
+        </div>
+        <div class="feature-box">
+          <div class="feature-icon">⚡</div>
+          <div class="feature-title">Trustless Execution</div>
+          <div class="feature-desc">Anyone can trigger execution. Approved BOT funds transfer directly to the recipient without intermediaries.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. THE PROBLEM & MARKET OPPORTUNITY -->
+    <div class="section-card">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <h2 class="section-title">The Problem & Market Need</h2>
+      </div>
+      <div class="grid-2">
+        <div class="feature-box" style="border-left: 3px solid var(--rose);">
+          <div class="feature-title" style="color: #fb7185;">The Existing Dilemma</div>
+          <ul style="padding-left: 18px; font-size: 13.5px; color: var(--text-muted); line-height: 1.8;">
+            <li><strong>Centralized Custody:</strong> Ecosystem grants depend on foundation executives or private multisigs, posing rug-pull and censorship risks.</li>
+            <li><strong>High Barrier to Governance:</strong> Existing DAO platforms (e.g. Aragon, GovernorAlpha) are overly complex, gas-expensive, or not deployed on emerging EVMs like Botchain.</li>
+            <li><strong>Opaque Fund Allocation:</strong> Token holders have zero real-time visibility into treasury balances or approval conditions.</li>
+          </ul>
+        </div>
+        <div class="feature-box" style="border-left: 3px solid var(--emerald);">
+          <div class="feature-title" style="color: #34d399;">The BotDAO Solution</div>
+          <ul style="padding-left: 18px; font-size: 13.5px; color: var(--text-muted); line-height: 1.8;">
+            <li><strong>Automated Smart Contract Vault:</strong> Native BOT pooling with instant on-chain balance tracking.</li>
+            <li><strong>Turnkey User Experience:</strong> Clean Web3 application tailored specifically to Botchain RPC and Explorer.</li>
+            <li><strong>Guaranteed Payouts:</strong> Smart contracts strictly enforce quorum and majority checks before disbursing funds.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. PROTOCOL ARCHITECTURE & LIFECYCLE -->
+    <div class="section-card">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <h2 class="section-title">System Architecture & Governance Lifecycle</h2>
+      </div>
+      <p>
+        The complete lifecycle of a BotDAO proposal is governed deterministically on-chain:
+      </p>
+
+      <div class="workflow">
+        <div class="step-box">
+          <strong>1. Deposit</strong>
+          <span>Treasury funded with native BOT</span>
+        </div>
+        <div class="arrow">→</div>
+        <div class="step-box">
+          <strong>2. Propose</strong>
+          <span>Submit amount, recipient & duration</span>
+        </div>
+        <div class="arrow">→</div>
+        <div class="step-box">
+          <strong>3. Vote</strong>
+          <span>1-Wallet = 1-Vote (FOR / AGAINST)</span>
+        </div>
+        <div class="arrow">→</div>
+        <div class="step-box">
+          <strong>4. Conclude</strong>
+          <span>Quorum & Majority verified</span>
+        </div>
+        <div class="arrow">→</div>
+        <div class="step-box">
+          <strong>5. Execute</strong>
+          <span>Public trigger disburses BOT</span>
+        </div>
+      </div>
+
+      <div class="callout">
+        <strong>Mathematical Passing Condition:</strong><br>
+        A proposal ID <code>p</code> is considered passed if and only if:
+        <br>
+        <code>block.timestamp >= p.endTime</code> &nbsp;<strong>AND</strong>&nbsp; 
+        <code>(p.forVotes + p.againstVotes) >= quorumVotes</code> &nbsp;<strong>AND</strong>&nbsp; 
+        <code>p.forVotes > p.againstVotes</code>
+      </div>
+    </div>
+
+    <!-- 4. TECHNICAL SPECIFICATIONS -->
+    <div class="section-card">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <h2 class="section-title">Smart Contract & Technical Specifications</h2>
+      </div>
+      <p>
+        The core engine is implemented in Solidity <code>^0.8.24</code> with audited OpenZeppelin primitives.
+      </p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Function / Method</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>depositTreasury()</code></td>
+            <td>External Payable</td>
+            <td>Allows any wallet to deposit native BOT directly into the non-custodial DAO vault.</td>
+          </tr>
+          <tr>
+            <td><code>createProposal(...)</code></td>
+            <td>External</td>
+            <td>Submits a proposal specifying recipient address, requested BOT, description, and duration.</td>
+          </tr>
+          <tr>
+            <td><code>vote(id, support)</code></td>
+            <td>External</td>
+            <td>Casts an immutable FOR or AGAINST vote with double-vote prevention.</td>
+          </tr>
+          <tr>
+            <td><code>proposalPassed(id)</code></td>
+            <td>Public View</td>
+            <td>Pure on-chain verification of voting deadline, quorum compliance, and positive majority.</td>
+          </tr>
+          <tr>
+            <td><code>executeProposal(id)</code></td>
+            <td>External (Reentrant Safe)</td>
+            <td>Disburses BOT to the recipient. Protected by OpenZeppelin's <code>ReentrancyGuard</code>.</td>
+          </tr>
+          <tr>
+            <td><code>cancelProposal(id)</code></td>
+            <td>External</td>
+            <td>Allows the proposal creator to cancel an active, unexecuted proposal.</td>
+          </tr>
+          <tr>
+            <td><code>getAllProposals()</code></td>
+            <td>External View</td>
+            <td>High-performance batch reader returning all proposals in a single RPC call.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 5. FULL-STACK IMPLEMENTATION -->
+    <div class="section-card">
+      <div class="section-header">
+        <div class="section-num">05</div>
+        <h2 class="section-title">Full-Stack Application Architecture</h2>
+      </div>
+      <div class="grid-2">
+        <div class="feature-box">
+          <div class="feature-title">Frontend Stack</div>
+          <ul style="padding-left: 18px; font-size: 13.5px; color: var(--text-muted); line-height: 1.8;">
+            <li><strong>Next.js 14 App Router:</strong> Server-side optimization and modular client components.</li>
+            <li><strong>Tailwind CSS:</strong> Custom glassmorphic dark design system with fluid animations.</li>
+            <li><strong>Wagmi v2 & Viem v2:</strong> Low-latency reactive hooks and typed contract interfaces.</li>
+            <li><strong>TanStack React Query:</strong> Smart caching and automated state invalidation.</li>
+          </ul>
+        </div>
+        <div class="feature-box">
+          <div class="feature-title">Web3 User Experience</div>
+          <ul style="padding-left: 18px; font-size: 13.5px; color: var(--text-muted); line-height: 1.8;">
+            <li><strong>Automatic Network Switching:</strong> One-click add/switch to Botchain Mainnet (ID 677).</li>
+            <li><strong>Live Countdown Timers:</strong> Real-time second-by-second voting period counters.</li>
+            <li><strong>Comprehensive Explorers:</strong> Direct deep-links to Botchain Explorer for every transaction.</li>
+            <li><strong>BotNS Ready:</strong> Ready for <code>.bot</code> decentralized name resolution.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. SECURITY & AUDITABILITY -->
+    <div class="section-card">
+      <div class="section-header">
+        <div class="section-num">06</div>
+        <h2 class="section-title">Security & Risk Analysis</h2>
+      </div>
+      <ul style="padding-left: 20px; font-size: 14px; color: #cbd5e1; line-height: 1.8;">
+        <li><strong>Zero Custodial Backdoors:</strong> No administrator, deployer, or multisig can withdraw or redirect treasury funds without a formal on-chain vote.</li>
+        <li><strong>Reentrancy Resistance:</strong> Strict adherence to Checks-Effects-Interactions (CEI) alongside OpenZeppelin's battle-tested <code>ReentrancyGuard</code>.</li>
+        <li><strong>Comprehensive Test Coverage:</strong> Hardhat automated test suites cover deposit dynamics, boundary conditions, quorum edge cases, double-voting rejection, and reentrancy safety.</li>
+      </ul>
+    </div>
+
+    <!-- 7. STRATEGIC ROADMAP -->
+    <div class="section-card">
+      <div class="section-header">
+        <div class="section-num">07</div>
+        <h2 class="section-title">Strategic Roadmap</h2>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot done"></div>
+          <div class="timeline-title">Phase 1: Foundation & Mainnet Launch (Completed ✅)</div>
+          <div class="timeline-desc">Smart contract deployment on Botchain Mainnet, native BOT vault, 1-wallet-1-vote governance, full Next.js dApp.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-title">Phase 2: Token-Weighted Governance & Delegation</div>
+          <div class="timeline-desc">Support for ERC-20 governance tokens, voting power snapshots, and delegated voting for community representatives.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-title">Phase 3: BotNS Identity & Reputation</div>
+          <div class="timeline-desc">Native resolution of <code>.bot</code> domains (Botchain Name Service), member profile badges, and on-chain governance reputation scores.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-title">Phase 4: Multi-DAO Factory & Ecosystem Vaults</div>
+          <div class="timeline-desc">No-code DAO factory permitting any Botchain community or DeFi protocol to deploy dedicated governance vaults in seconds.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8. APPENDIX & NETWORK CONFIG -->
+    <div class="section-card">
+      <div class="section-header">
+        <div class="section-num">08</div>
+        <h2 class="section-title">Appendix: Verified Deployment Details</h2>
+      </div>
+      <table>
+        <tbody>
+          <tr>
+            <td><strong>Project Name</strong></td>
+            <td>BotDAO</td>
+          </tr>
+          <tr>
+            <td><strong>Contract Address</strong></td>
+            <td><code>0x8e0FC0fAe92E70D83fC6Bdf0a124057394A0dA57</code></td>
+          </tr>
+          <tr>
+            <td><strong>Network</strong></td>
+            <td>Botchain Mainnet</td>
+          </tr>
+          <tr>
+            <td><strong>Chain ID</strong></td>
+            <td><code>677</code></td>
+          </tr>
+          <tr>
+            <td><strong>RPC Endpoint</strong></td>
+            <td><code>https://rpc.botchain.ai</code></td>
+          </tr>
+          <tr>
+            <td><strong>Block Explorer</strong></td>
+            <td><a href="https://scan.botchain.ai/address/0x8e0FC0fAe92E70D83fC6Bdf0a124057394A0dA57" target="_blank" style="color: #38bdf8;">https://scan.botchain.ai</a></td>
+          </tr>
+          <tr>
+            <td><strong>License</strong></td>
+            <td>MIT Open Source</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="doc-footer">
+      <p>© 2026 BotDAO Protocol. Built on Botchain Mainnet.</p>
+      <p style="margin-top: 6px; font-size: 12px;">Use the <strong>"Print / Save as PDF"</strong> button at the top to save this document as a PDF pitch deck/whitepaper.</p>
+    </div>
+
+  </div>
+
+  <script>
+    function copyDocumentLink() {
+      navigator.clipboard.writeText(window.location.href).then(() => {
+        alert("Document link copied to clipboard!");
+      }).catch(() => {
+        prompt("Copy this document link:", window.location.href);
+      });
+    }
+  </script>
+</body>
+</html>

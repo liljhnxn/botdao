@@ -9,7 +9,8 @@
     "lint": "next lint",
     "compile": "hardhat compile",
     "test": "hardhat test",
-    "deploy": "hardhat run scripts/deploy.ts --network botchain"
+    "deploy": "hardhat run scripts/deploy.ts --network mainnet",
+    "deploy:mainnet": "hardhat run scripts/deploy.ts --network mainnet"
   },
   "dependencies": {
     "@openzeppelin/contracts": "^5.0.2",

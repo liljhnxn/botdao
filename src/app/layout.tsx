@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   title: "BotDAO — Decentralized Community Governance & Treasury",
   description:
     "A decentralized community treasury where users create proposals, vote on decisions, and execute approved payments entirely on-chain on Botchain.",
-  keywords: ["DAO", "Botchain", "Bohr", "Governance", "Treasury", "Web3", "Solidity"],
+  keywords: ["DAO", "Botchain", "Governance", "Treasury", "Web3", "Solidity"],
   icons: {
     icon: "/favicon.svg",
     shortcut: "/favicon.svg",

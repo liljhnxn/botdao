@@ -70,7 +70,7 @@ export default function LandingPage() {
       <section className="relative text-center space-y-8 max-w-4xl mx-auto pt-6">
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 text-xs font-semibold shadow-inner">
           <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-          <span>Decentralized Governance on Botchain Testnet</span>
+          <span>Decentralized Governance on Botchain Mainnet</span>
         </div>
 
         <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-tight">

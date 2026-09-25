@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { Shield, ExternalLink, Globe, Code2, Sparkles } from "lucide-react";
-import { BOTCHAIN_EXPLORER_URL, BOTCHAIN_RPC_URL } from "@/lib/config";
+import { BOTCHAIN_EXPLORER_URL, BOTCHAIN_RPC_URL, BOTCHAIN_CHAIN_ID } from "@/lib/config";
 import { BOTDAO_CONTRACT_ADDRESS } from "@/contracts/botdao";
 
 export function Footer() {
@@ -20,7 +20,7 @@ export function Footer() {
               <span className="font-bold text-sm text-white tracking-wider">BOTDAO</span>
             </div>
             <p className="text-slate-400 text-xs max-w-sm leading-relaxed">
-              Govern Together. Build On-Chain. A decentralized community treasury where members propose, vote, and execute fund allocations on Botchain Testnet.
+              Govern Together. Build On-Chain. A decentralized community treasury where members propose, vote, and execute fund allocations on Botchain Mainnet.
             </p>
             <div className="flex items-center gap-2 pt-1">
               <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-indigo-500/10 text-indigo-400 text-[10px] font-semibold border border-indigo-500/20">
@@ -67,15 +67,15 @@ export function Footer() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1 hover:text-indigo-400 transition-colors"
                 >
-                  <span>Bohr Explorer</span>
+                  <span>Botchain Explorer</span>
                   <ExternalLink className="w-3 h-3" />
                 </a>
               </li>
               <li>
-                <span className="text-slate-500">Chain ID: <span className="text-slate-300 font-mono">968</span></span>
+                <span className="text-slate-500">Chain ID: <span className="text-slate-300 font-mono">{BOTCHAIN_CHAIN_ID}</span></span>
               </li>
               <li>
-                <span className="text-slate-500">RPC: <span className="text-slate-300 font-mono">bohr.life</span></span>
+                <span className="text-slate-500">RPC: <span className="text-slate-300 font-mono">{BOTCHAIN_RPC_URL.replace(/^https?:\/\//, '')}</span></span>
               </li>
               {BOTDAO_CONTRACT_ADDRESS && (
                 <li>
@@ -96,7 +96,7 @@ export function Footer() {
 
         <div className="pt-6 border-t border-slate-900 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-slate-500 text-[11px]">
-            © {new Date().getFullYear()} BotDAO. Built on Botchain & Bohr Testnet. All actions executed on-chain.
+            © {new Date().getFullYear()} BotDAO. Built on Botchain Mainnet. All actions executed on-chain.
           </p>
           <div className="flex items-center gap-4 text-slate-500 text-[11px]">
             <span>Decentralized Treasury</span>
