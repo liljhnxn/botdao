@@ -71,8 +71,9 @@ Empowering the Botchain community with decentralized treasury governance, on-cha
 #Botchain #BotDAO #Web3 #DeFi #Governance
 ```
 
-- **Image to attach:** `public/x-branding/mainnet_launch_banner_1790366673092.jpg`
-- **Submitted Tweet URL:** `[PASTE_TWEET_URL_HERE]`
+- **Submitted Tweet URL:** [https://x.com/BotDao2i/status/2105286710724637170?s=20](https://x.com/BotDao2i/status/2105286710724637170?s=20)
+- **Twitter / X Handle:** `@BotDao2i`
+- **Status:** Live & Public on X
 
 ---
 
@@ -80,8 +81,8 @@ Empowering the Botchain community with decentralized treasury governance, on-cha
 
 ### Article Details:
 - **Title:** *BotDAO Deploys on BOT Chain Mainnet: Decentralized Community Governance & Treasury Infrastructure*
-- **Publisher / Platform:** Telegraph (`telegra.ph`) / Medium / Mirror.xyz
-- **Submitted PR URL:** `[PASTE_PR_URL_HERE]`
+- **Submitted PR URL:** [https://telegra.ph/BotDAO-Deploys-on-BOT-Chain-Mainnet-Decentralized-Community-Governance--Treasury-Infrastructure-09-30](https://telegra.ph/BotDAO-Deploys-on-BOT-Chain-Mainnet-Decentralized-Community-Governance--Treasury-Infrastructure-09-30)
+- **Status:** Published & Publicly Accessible
 
 ### Article Content:
 
