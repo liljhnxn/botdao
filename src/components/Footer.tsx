@@ -58,35 +58,47 @@ export function Footer() {
 
           {/* Network Info */}
           <div className="space-y-2">
-            <h4 className="text-white font-semibold text-xs tracking-wider uppercase">Network & Links</h4>
+            <h4 className="text-white font-semibold text-xs tracking-wider uppercase">Official Ecosystem & Links</h4>
             <ul className="space-y-1.5">
               <li>
                 <a
-                  href={BOTCHAIN_EXPLORER_URL}
+                  href="https://botchain.ai"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 hover:text-indigo-400 transition-colors"
+                  className="inline-flex items-center gap-1 text-cyan-400 hover:text-cyan-300 font-medium transition-colors"
                 >
-                  <span>Botchain Explorer</span>
+                  <Globe className="w-3 h-3 text-cyan-400" />
+                  <span>https://botchain.ai</span>
                   <ExternalLink className="w-3 h-3" />
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://scan.botchain.ai"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 text-cyan-400 hover:text-cyan-300 font-medium transition-colors"
+                >
+                  <ExternalLink className="w-3 h-3 text-cyan-400" />
+                  <span>https://scan.botchain.ai</span>
                 </a>
               </li>
               <li>
                 <span className="text-slate-500">Chain ID: <span className="text-slate-300 font-mono">{BOTCHAIN_CHAIN_ID}</span></span>
               </li>
               <li>
-                <span className="text-slate-500">RPC: <span className="text-slate-300 font-mono">{BOTCHAIN_RPC_URL.replace(/^https?:\/\//, '')}</span></span>
+                <span className="text-slate-500">RPC: <span className="text-slate-300 font-mono">{BOTCHAIN_RPC_URL}</span></span>
               </li>
               {BOTDAO_CONTRACT_ADDRESS && (
                 <li>
                   <a
-                    href={`${BOTCHAIN_EXPLORER_URL}/address/${BOTDAO_CONTRACT_ADDRESS}`}
+                    href={`https://scan.botchain.ai/address/${BOTDAO_CONTRACT_ADDRESS}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-indigo-400 hover:text-indigo-300 font-medium"
+                    className="inline-flex items-center gap-1 text-indigo-400 hover:text-indigo-300 font-medium break-all"
                   >
-                    <span>DAO Contract (Verified)</span>
-                    <ExternalLink className="w-3 h-3" />
+                    <span>DAO Contract: {BOTDAO_CONTRACT_ADDRESS.slice(0, 6)}...{BOTDAO_CONTRACT_ADDRESS.slice(-4)}</span>
+                    <ExternalLink className="w-3 h-3 shrink-0" />
                   </a>
                 </li>
               )}

@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { WalletButton } from "./WalletButton";
-import { Shield, Vote, LayoutDashboard, PlusCircle, Vault, Menu, X, Coins, FileText, ExternalLink } from "lucide-react";
+import { Shield, Vote, LayoutDashboard, PlusCircle, Vault, Menu, X, Coins, FileText, ExternalLink, Globe } from "lucide-react";
 import { BOTCHAIN_CHAIN_ID, BOTCHAIN_EXPLORER_URL } from "@/lib/config";
 
 export function Navbar() {
@@ -17,11 +17,46 @@ export function Navbar() {
     { name: "Create Proposal", href: "/create-proposal", icon: <PlusCircle className="w-4 h-4" /> },
     { name: "Treasury", href: "/treasury", icon: <Vault className="w-4 h-4" /> },
     { name: "Whitepaper", href: "/whitepaper", icon: <FileText className="w-4 h-4" /> },
-    { name: "Explorer", href: BOTCHAIN_EXPLORER_URL, icon: <ExternalLink className="w-3.5 h-3.5 text-cyan-400" />, isExternal: true },
+    { name: "botchain.ai", href: "https://botchain.ai", icon: <Globe className="w-3.5 h-3.5 text-cyan-400" />, isExternal: true },
+    { name: "scan.botchain.ai", href: "https://scan.botchain.ai", icon: <ExternalLink className="w-3.5 h-3.5 text-cyan-400" />, isExternal: true },
   ];
 
   return (
-    <header className="sticky top-0 z-40 border-b border-slate-800/80 bg-slate-950/70 backdrop-blur-xl">
+    <header className="sticky top-0 z-40 border-b border-slate-800/80 bg-slate-950/90 backdrop-blur-xl">
+      {/* Official Botchain Verification Bar */}
+      <div className="bg-gradient-to-r from-indigo-950 via-slate-900 to-indigo-950 border-b border-indigo-500/20 px-4 py-1.5 text-center text-[11px] text-slate-300 flex items-center justify-center flex-wrap gap-x-4 gap-y-1">
+        <span className="inline-flex items-center gap-1.5 font-medium text-slate-300">
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+          <span>Botchain Mainnet (Chain ID {BOTCHAIN_CHAIN_ID})</span>
+        </span>
+        <span className="text-slate-600 hidden sm:inline">•</span>
+        <span className="inline-flex items-center gap-1.5">
+          <span className="text-slate-400">Official Website:</span>
+          <a
+            href="https://botchain.ai"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-cyan-400 hover:text-cyan-300 font-semibold underline decoration-cyan-500/50 hover:decoration-cyan-400 inline-flex items-center gap-0.5 transition-colors"
+          >
+            <span>https://botchain.ai</span>
+            <ExternalLink className="w-3 h-3 ml-0.5" />
+          </a>
+        </span>
+        <span className="text-slate-600 hidden sm:inline">•</span>
+        <span className="inline-flex items-center gap-1.5">
+          <span className="text-slate-400">Block Explorer:</span>
+          <a
+            href="https://scan.botchain.ai"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-cyan-400 hover:text-cyan-300 font-semibold underline decoration-cyan-500/50 hover:decoration-cyan-400 inline-flex items-center gap-0.5 transition-colors"
+          >
+            <span>https://scan.botchain.ai</span>
+            <ExternalLink className="w-3 h-3 ml-0.5" />
+          </a>
+        </span>
+      </div>
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Brand Logo */}
@@ -51,10 +86,10 @@ export function Navbar() {
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium text-slate-300 hover:text-white hover:bg-slate-900/60 border border-transparent transition-all"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold text-cyan-300 hover:text-white hover:bg-slate-900/60 border border-cyan-500/20 hover:border-cyan-500/40 transition-all"
                   >
-                    <span>{link.name}</span>
                     {link.icon}
+                    <span>{link.name}</span>
                   </a>
                 );
               }
@@ -79,11 +114,11 @@ export function Navbar() {
           {/* Right Area: Network badge & Wallet Button */}
           <div className="flex items-center gap-3">
             <a
-              href={BOTCHAIN_EXPLORER_URL}
+              href="https://scan.botchain.ai"
               target="_blank"
               rel="noopener noreferrer"
               className="hidden lg:flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-900/70 hover:bg-slate-800/90 border border-slate-800 hover:border-cyan-500/40 text-[11px] text-slate-400 hover:text-cyan-300 transition-all font-medium group"
-              title="View Botchain Mainnet Block Explorer"
+              title="View Botchain Mainnet Block Explorer (https://scan.botchain.ai)"
             >
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
               <span>Botchain {BOTCHAIN_CHAIN_ID}</span>
@@ -114,11 +149,11 @@ export function Navbar() {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-900"
+                  className="flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-semibold text-cyan-300 hover:text-white hover:bg-slate-900"
                 >
                   <div className="flex items-center gap-3">
-                    <Coins className="w-4 h-4 text-cyan-400" />
-                    <span>Botchain Explorer</span>
+                    {link.icon}
+                    <span>{link.name}</span>
                   </div>
                   <ExternalLink className="w-4 h-4 text-cyan-400" />
                 </a>

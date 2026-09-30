@@ -20,6 +20,7 @@ import {
   Layers,
   Zap,
   ExternalLink,
+  Globe,
 } from "lucide-react";
 
 export default function LandingPage() {
@@ -69,17 +70,27 @@ export default function LandingPage() {
     <div className="space-y-24 py-6 sm:py-12">
       {/* Hero Section */}
       <section className="relative text-center space-y-8 max-w-4xl mx-auto pt-6">
-        <div className="inline-flex flex-wrap items-center justify-center gap-2 px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 text-xs font-semibold shadow-inner">
+        <div className="inline-flex flex-wrap items-center justify-center gap-2 px-4 py-2 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 text-xs font-semibold shadow-inner">
           <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
           <span>Decentralized Governance on Botchain Mainnet</span>
           <span className="text-slate-500">•</span>
           <a
-            href={BOTCHAIN_EXPLORER_URL}
+            href="https://botchain.ai"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-cyan-400 hover:text-cyan-300 inline-flex items-center gap-1 font-medium hover:underline transition-colors"
+            className="text-cyan-400 hover:text-cyan-300 inline-flex items-center gap-1 font-semibold hover:underline transition-colors"
           >
-            <span>scan.botchain.ai</span>
+            <span>https://botchain.ai</span>
+            <ExternalLink className="w-3 h-3" />
+          </a>
+          <span className="text-slate-500">•</span>
+          <a
+            href="https://scan.botchain.ai"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-cyan-400 hover:text-cyan-300 inline-flex items-center gap-1 font-semibold hover:underline transition-colors"
+          >
+            <span>https://scan.botchain.ai</span>
             <ExternalLink className="w-3 h-3" />
           </a>
         </div>
@@ -92,32 +103,41 @@ export default function LandingPage() {
         </h1>
 
         <p className="text-base sm:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed">
-          A decentralized community treasury where users create proposals, vote on decisions, and execute approved payments entirely on-chain.
+          A decentralized community treasury where users create proposals, vote on decisions, and execute approved payments entirely on-chain on Botchain Mainnet.
         </p>
 
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
+        <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
           <Link
             href="/dashboard"
-            className="w-full sm:w-auto px-8 py-3.5 rounded-xl font-bold text-sm bg-gradient-to-r from-indigo-600 via-indigo-500 to-cyan-500 hover:from-indigo-500 hover:to-cyan-400 text-white shadow-lg shadow-indigo-500/25 transition-all flex items-center justify-center gap-2"
+            className="px-6 py-3 rounded-xl font-bold text-sm bg-gradient-to-r from-indigo-600 via-indigo-500 to-cyan-500 hover:from-indigo-500 hover:to-cyan-400 text-white shadow-lg shadow-indigo-500/25 transition-all flex items-center justify-center gap-2"
           >
             <span>Launch App</span>
             <ArrowRight className="w-4 h-4" />
           </Link>
           <Link
             href="/treasury"
-            className="w-full sm:w-auto px-8 py-3.5 rounded-xl font-semibold text-sm bg-slate-900/80 hover:bg-slate-800 text-slate-200 border border-slate-700 hover:border-indigo-500/40 transition-all flex items-center justify-center gap-2"
+            className="px-6 py-3 rounded-xl font-semibold text-sm bg-slate-900/80 hover:bg-slate-800 text-slate-200 border border-slate-700 hover:border-indigo-500/40 transition-all flex items-center justify-center gap-2"
           >
             <Vault className="w-4 h-4 text-indigo-400" />
             <span>View Treasury</span>
           </Link>
           <a
-            href={`${BOTCHAIN_EXPLORER_URL}/address/${BOTDAO_CONTRACT_ADDRESS}`}
+            href="https://botchain.ai"
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full sm:w-auto px-6 py-3.5 rounded-xl font-semibold text-sm bg-slate-900/80 hover:bg-slate-800 text-cyan-300 hover:text-cyan-200 border border-cyan-500/30 hover:border-cyan-500/60 transition-all flex items-center justify-center gap-2"
+            className="px-5 py-3 rounded-xl font-semibold text-xs bg-slate-900/80 hover:bg-slate-800 text-cyan-300 hover:text-cyan-200 border border-cyan-500/30 hover:border-cyan-500/60 transition-all flex items-center justify-center gap-1.5"
           >
-            <ExternalLink className="w-4 h-4 text-cyan-400" />
-            <span>Explorer Contract</span>
+            <span>botchain.ai</span>
+            <ExternalLink className="w-3.5 h-3.5 text-cyan-400" />
+          </a>
+          <a
+            href="https://scan.botchain.ai"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-5 py-3 rounded-xl font-semibold text-xs bg-slate-900/80 hover:bg-slate-800 text-cyan-300 hover:text-cyan-200 border border-cyan-500/30 hover:border-cyan-500/60 transition-all flex items-center justify-center gap-1.5"
+          >
+            <span>scan.botchain.ai</span>
+            <ExternalLink className="w-3.5 h-3.5 text-cyan-400" />
           </a>
         </div>
       </section>
@@ -271,6 +291,90 @@ export default function LandingPage() {
             </Link>
           </div>
         )}
+      </section>
+
+      {/* Botchain Ecosystem Verification Section */}
+      <section className="space-y-6 pt-6 border-t border-slate-900">
+        <div className="text-center max-w-2xl mx-auto space-y-2">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/60 border border-cyan-500/30 text-cyan-300 text-xs font-semibold">
+            <Globe className="w-3.5 h-3.5" />
+            <span>Official Botchain Verification</span>
+          </div>
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+            Built Directly on BOT Chain Mainnet
+          </h2>
+          <p className="text-xs sm:text-sm text-slate-400">
+            BotDAO operates on Botchain Mainnet infrastructure. Verify official endpoints, block explorer traces, and contract addresses below.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {/* Card 1: Official Website */}
+          <div className="glass-panel rounded-2xl p-6 border border-slate-800 space-y-3">
+            <div className="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400">
+              <Globe className="w-5 h-5" />
+            </div>
+            <h3 className="text-base font-bold text-white">Botchain Official Website</h3>
+            <p className="text-xs text-slate-400 leading-relaxed">
+              Official portal, ecosystem documentation, and core developer tools for Botchain.
+            </p>
+            <div className="pt-2">
+              <a
+                href="https://botchain.ai"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-xs font-semibold text-cyan-400 hover:text-cyan-300 underline transition-colors"
+              >
+                <span>https://botchain.ai</span>
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
+            </div>
+          </div>
+
+          {/* Card 2: Mainnet Explorer */}
+          <div className="glass-panel rounded-2xl p-6 border border-slate-800 space-y-3">
+            <div className="w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/30 flex items-center justify-center text-indigo-400">
+              <ExternalLink className="w-5 h-5" />
+            </div>
+            <h3 className="text-base font-bold text-white">Botchain Mainnet Explorer</h3>
+            <p className="text-xs text-slate-400 leading-relaxed">
+              Real-time block explorer inspecting blocks, transactions, contract state, and gas metrics.
+            </p>
+            <div className="pt-2">
+              <a
+                href="https://scan.botchain.ai"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-xs font-semibold text-cyan-400 hover:text-cyan-300 underline transition-colors"
+              >
+                <span>https://scan.botchain.ai</span>
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
+            </div>
+          </div>
+
+          {/* Card 3: DAO Smart Contract */}
+          <div className="glass-panel rounded-2xl p-6 border border-slate-800 space-y-3">
+            <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
+              <CheckCircle2 className="w-5 h-5" />
+            </div>
+            <h3 className="text-base font-bold text-white">Verified DAO Contract</h3>
+            <p className="text-xs text-slate-400 leading-relaxed font-mono text-[11px] break-all">
+              {BOTDAO_CONTRACT_ADDRESS}
+            </p>
+            <div className="pt-2">
+              <a
+                href={`https://scan.botchain.ai/address/${BOTDAO_CONTRACT_ADDRESS}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-400 hover:text-emerald-300 underline transition-colors"
+              >
+                <span>View Verified Source on Scan</span>
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
+            </div>
+          </div>
+        </div>
       </section>
     </div>
   );
